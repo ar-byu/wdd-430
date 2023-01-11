@@ -12,8 +12,10 @@
 <!-- <p>{{ serverName }}</p> -->
 <button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
 <!-- <p>{{ allowNewServer }}</p> -->
-<p>{{ serverCreationStatus }}</p>
-<app-server></app-server>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<p *ngIf="serverCreated; else noServer">Server was created. Server name is {{ serverName }}.</p>
+<ng-template #noServer><p>No server was created.</p></ng-template>
+<app-server *ngFor="let server of servers"></app-server>
 
 <label>Username:</label>
 <input
@@ -23,4 +25,14 @@
 >
 <p>{{ username }}</p>
 <button class="btn btn-primary" [disabled]="username === ''" (click)="onResetUsername()">Reset Username</button>
+
+<h2>Dynamic Content</h2>
+<button class="btn btn-primary" (click)="onToggleDetails()">Toggle Details</button>
+<p *ngIf="showText">Mornkan Sitri Drakos</p>
+<ul>
+    <li *ngFor="let click of timesClicked; let i = index"
+    [ngStyle]="{backgroundColor: i >= 4 ? 'blue' : 'transparent'}"
+    [ngClass]="{'white-text': i >= 4}"
+    >{{ click }}</li>
+</ul>
 

@@ -10,6 +10,10 @@ export class ServersComponent {
   serverCreationStatus = 'No server was created!';
   serverName = 'Test Server';
   username = '';
+  serverCreated = false;
+  servers = ['Test Server', 'Test Server 2'];
+  showText = false;
+  timesClicked: Date[] = [];
 
   constructor() {
     setTimeout(() => {
@@ -18,6 +22,8 @@ export class ServersComponent {
   }
 
   onCreateServer() {
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
     this.serverCreationStatus = 'Server was created! Server Name: ' + this.serverName;
   }
 
@@ -29,6 +35,10 @@ export class ServersComponent {
     this.username = '';
   }
 
-
+  onToggleDetails() {
+    this.showText = !this.showText;
+    // this.timesClicked.push(this.timesClicked.length + 1);
+    this.timesClicked.push(new Date())
+  }
 
 }
