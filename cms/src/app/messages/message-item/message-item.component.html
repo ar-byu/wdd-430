@@ -1,6 +1,12 @@
-<a class="list-group-item clearfix">
+<a class="list-group-item clearfix">
     <div class="">
-    <span class="messageHeader">SendersName</span>
-    <div class="messageText">MessageText</div>
+    
+        <a class="list-group-item clearfix">
+            <div class=''>
+            <span class='messageHeader'>{{ message.sender }}</span>
+            <div class='messageText'>{{ message.msgText }}</div>
+            </div>
+        </a>
+    
     </div>
 </a>    
