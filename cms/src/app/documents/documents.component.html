@@ -1,10 +1,15 @@
 <div class="row">
       <div class="col-md-5">
-        <app-documents-list></app-documents-list>
+        <app-documents-list (selectedDocumentEvent)="selectedDocument = $event"></app-documents-list>
       </div>
     
     <div class="col-md-4">
-        <app-document-detail></app-document-detail>
-    </div>
+        <app-document-detail
+        *ngIf="selectedDocument; else infoText"
+        [document]="selectedDocument"></app-document-detail>
+    <ng-template #infoText>
+      <h2>Please select a document.</h2>
+    </ng-template>
+      </div>
     </div>
     
