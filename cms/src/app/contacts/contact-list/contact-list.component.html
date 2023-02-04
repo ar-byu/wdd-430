@@ -7,7 +7,6 @@
                 <div class="panel-body">
                     <app-contact-item 
                     *ngFor="let contactElement of contacts"
-                    [contact]="contactElement"
-                    (contactSelected)="onContactSelected(contactElement)"></app-contact-item>
+                    [contact]="contactElement"></app-contact-item>
                 </div>
             </div>
