@@ -6,7 +6,8 @@
                 </div>
                 <div class="panel-body">
                     <app-contact-item 
-                    *ngFor="let contactElement of contacts"
-                    [contact]="contactElement"></app-contact-item>
+                    *ngFor="let contactElement of contacts; let i = index"
+                    [contact]="contactElement"
+                    [index]="i"></app-contact-item>
                 </div>
             </div>

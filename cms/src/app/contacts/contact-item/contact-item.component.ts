@@ -9,6 +9,7 @@ import { ContactService } from '../contact.service';
 })
 export class ContactItemComponent {
   @Input() contact: Contact;
+  @Input() index: number;
 
   constructor(private contactService: ContactService) {}
 
