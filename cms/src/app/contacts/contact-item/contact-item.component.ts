@@ -13,7 +13,4 @@ export class ContactItemComponent {
 
   constructor(private contactService: ContactService) {}
 
-  onSelected() {
-    this.contactService.contactSelectedEvent.emit(this.contact);
-  }
 }
