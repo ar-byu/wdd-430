@@ -29,7 +29,7 @@ export class DocumentService {
   for (let document of this.documents) {
     let currentId = +document.id
     if (currentId > maxId) {
-      let maxId = currentId
+      maxId = currentId
     }
   }
   return maxId;

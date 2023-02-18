@@ -9,6 +9,7 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
 export class ContactService {
   contactListChangedEvent = new Subject<Contact[]>();
   private contacts: Contact [] = [];
+  maxContactId: number;
 
   constructor() { 
     this.contacts = MOCKCONTACTS;
@@ -22,6 +23,42 @@ export class ContactService {
     return this.contacts[index]
   }
 
+  getMaxId(): number {
+    let maxId = 0;
+    for (let contact of this.contacts) {
+      let currentId = +contact.id
+      if (currentId > maxId) {
+        maxId = currentId
+      }
+    }
+    return maxId;
+   }
+
+   addContact(newContact: Contact) {
+    if (!newContact) {
+      return;
+    }
+    this.maxContactId++;
+    newContact.id = this.maxContactId.toString();
+    this.contacts.push(newContact)
+    let contactListClone = this.contacts.slice();
+    this.contactListChangedEvent.next(contactListClone);
+  }
+
+  updateContact(originalContact: Contact, newContact: Contact) {
+    if (!originalContact || !newContact) {
+      return;
+    }
+    let pos = this.contacts.indexOf(originalContact);
+    if (pos < 0) {
+      return;
+    }
+    newContact.id = originalContact.id;
+    this.contacts[pos] = newContact;
+    let contactListClone = this.contacts.slice();
+    this.contactListChangedEvent.next(contactListClone);
+  }
+
   deleteContact(contact: Contact) {
     if (!contact) {
       return;
@@ -31,7 +68,8 @@ export class ContactService {
       return;
     }
     this.contacts.splice(pos, 1);
-    this.contactListChangedEvent.next(this.contacts);
+    let contactListClone = this.contacts.slice();
+    this.contactListChangedEvent.next(contactListClone);
   }
 
 }
