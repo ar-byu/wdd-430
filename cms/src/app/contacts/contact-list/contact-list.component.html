@@ -2,12 +2,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading" style="display: flex; flex-direction: row;">
                 <h1><b>Contacts</b></h1>
-                <button class="btn btn-success" style="margin-left: 50%;">New Contact</button>
+                <button class="btn btn-success" style="margin-left: 50%;" [routerLink]="'new'">New Contact</button>
                 </div>
                 <div class="panel-body">
                     <app-contact-item 
                     *ngFor="let contactElement of contacts; let i = index"
                     [contact]="contactElement"
-                    [index]="i"></app-contact-item>
+                    [index]="i"
+                    dnd-draggable [dragEnabled]="true" [dragData]="contactElement" [dropZones]="['contactGroup']"></app-contact-item>
                 </div>
             </div>
