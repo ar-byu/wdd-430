@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-body">
-      <form id="contact-edit" #f="ngForm" (onSubmit)="onSubmit(f)">
+      <form id="contact-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
         <div class="row">
           <div class="col-sm-12 form-group">
             <label for="name">Name:</label>
@@ -68,7 +68,7 @@
               max="255"
               name="imageUrl"
               [ngModel]="contact?.imageUrl"
-              #imageUrl="ngModel">
+              #name="ngModel">
           </div>
         </div>
   
@@ -80,8 +80,8 @@
                 dnd-droppable [dropZones]="['contactGroup']" (onDropSuccess)="addToGroup($event)">
               <div *ngFor="let contact of groupContacts; let i = index">
                 <div>
-                  <app-contact-item class="col-sm-11" [contact]="contact"
-                  name="group" [ngModel]="contact?.group" #group="ngModel"></app-contact-item>
+                  <app-contact-item class="col-sm-11" [contact]="contact" [(ngModel)]="contact.group"
+                  [ngModel]="contact?.group" #contact="ngModel"></app-contact-item>
                   <button class="btn btn-danger col-sm-2 deleteButton" (click)="onRemoveItem(i)">X</button>
                 </div>
               </div>
