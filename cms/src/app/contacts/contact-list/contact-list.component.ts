@@ -14,6 +14,7 @@ import { DndModule } from 'ng2-dnd/src/dnd.module';
 export class ContactListComponent {
   contacts: Contact[];
   private subscription: Subscription;
+  term: string;
 
   constructor(private contactService: ContactService) {
   }
@@ -32,5 +33,8 @@ export class ContactListComponent {
     this.subscription.unsubscribe;
   }
 
-  
+  search(value: string) {
+    this.term = value;
+  }
+
 }

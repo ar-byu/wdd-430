@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactsStartComponent } from './contacts/contacts-start/contacts-start.component';
 import { DndModule } from 'ng2-dnd';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DndModule } from 'ng2-dnd';
     DocumentStartComponent,
     DocumentEditComponent,
     ContactEditComponent,
-    ContactsStartComponent
+    ContactsStartComponent,
+    ContactsFilterPipe
   ],
   imports: [
     BrowserModule,
