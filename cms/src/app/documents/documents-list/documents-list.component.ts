@@ -10,12 +10,12 @@ import { DocumentService } from '../document.service';
 })
 export class DocumentsListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  documents: Document[];
+  documents: Document[] = [];
 
   constructor(private documentService: DocumentService) {}
 
   ngOnInit() {
-    this.documents = this.documentService.getDocuments();
+    this.documentService.getDocuments();
     this.subscription = this.documentService.documentListChangedEvent
       .subscribe(
         (documents: Document[]) => {

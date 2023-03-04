@@ -12,7 +12,7 @@ import { DndModule } from 'ng2-dnd/src/dnd.module';
 
 
 export class ContactListComponent {
-  contacts: Contact[];
+  contacts: Contact[] = [];
   private subscription: Subscription;
   term: string;
 
@@ -20,7 +20,7 @@ export class ContactListComponent {
   }
 
   ngOnInit() {
-    this.contacts = this.contactService.getContacts();
+    this.contactService.getContacts();
     this.subscription = this.contactService.contactListChangedEvent
       .subscribe(
         (contacts: Contact[]) => {

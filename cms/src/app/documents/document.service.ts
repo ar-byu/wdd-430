@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Document } from './document.model';
-import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +11,25 @@ export class DocumentService {
   private documents: Document[] = [];
   maxDocumentId: number;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
+  constructor(private http: HttpClient) {
     this.maxDocumentId = this.getMaxId()
    }
 
-  getDocuments(): Document[] {
-    return this.documents.slice();
+  getDocuments() {
+    //return this.documents.slice();
+    this.http.get("https://wdd-430-cms-667fc-default-rtdb.firebaseio.com/documents.json")
+    .subscribe(
+      (documents: Document[] = []) => {
+        this.documents = documents;
+        this.maxDocumentId = this.getMaxId();
+        this.documents.sort((a, b) => +a.id - +b.id);
+        this.documentListChangedEvent.next(this.documents.slice());
+        this.documents = JSON.parse(JSON.stringify(this.documents));
+      },
+      (errors: any) => {
+        console.error(errors)
+      }
+    )
   }
 
   getDocument(index: number) {
@@ -43,7 +55,7 @@ export class DocumentService {
     newDocument.id = this.maxDocumentId.toString();
     this.documents.push(newDocument)
     let documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocument(documentsListClone);
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -57,7 +69,7 @@ export class DocumentService {
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
     let documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocument(documentsListClone);
   }
 
   deleteDocument(document: Document) {
@@ -70,6 +82,25 @@ export class DocumentService {
     }
     this.documents.splice(pos, 1);
     let documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocument(documentsListClone);
+  }
+
+  storeDocument(documents: Document[]) {
+    const documentsToString = JSON.stringify(documents);
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.getDocuments();
+    this.http
+    .put("https://wdd-430-cms-667fc-default-rtdb.firebaseio.com/documents.json", documentsToString, {headers})
+    .subscribe(
+      (res) => {
+        this.documentListChangedEvent.next(this.documents.slice()), res;
+      },
+      (errors: any) => {
+        console.error(errors)
+      }
+    )
+
   }
 }

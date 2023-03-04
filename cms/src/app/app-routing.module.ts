@@ -9,6 +9,7 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactsStartComponent } from './contacts/contacts-start/contacts-start.component';
+import { ContactResolverService } from './contacts/contact-resolver.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/documents', pathMatch: 'full'},
@@ -24,7 +25,7 @@ const appRoutes: Routes = [
         {path: ':id', component: ContactDetailComponent},
         {path: ':id/edit', component: ContactEditComponent}
     ] },
-    { path: 'messages', component: MessageListComponent}
+    { path: 'messages', component: MessageListComponent, resolve: [ContactResolverService]}
 ]
 
 @NgModule({
