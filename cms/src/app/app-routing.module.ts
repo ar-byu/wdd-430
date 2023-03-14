@@ -12,7 +12,7 @@ import { ContactsStartComponent } from './contacts/contacts-start/contacts-start
 import { ContactResolverService } from './contacts/contact-resolver.service';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/documents', pathMatch: 'full'},
+    { path: '', redirectTo: '/', pathMatch: 'full'},
     { path: 'documents', component: DocumentsComponent, children: [
         {path: '', component: DocumentStartComponent},
         {path: 'new', component: DocumentEditComponent},
