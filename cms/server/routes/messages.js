@@ -4,7 +4,9 @@ const sequenceGenerator = require('./sequenceGenerator');
 const Message = require('../models/message');
 
 router.get('/', (res, req, next) => {
-    Message.find((error, data) => {
+    Message
+        .find()
+        .then((error, data) => {
         console.log(data);
         if (error) {
             return res.status(500).json({

@@ -4,7 +4,9 @@ const sequenceGenerator = require('./sequenceGenerator');
 const Document = require('../models/document');
 
 router.get('/', (res, req, next) => {
-    Document.find((error, data) => {
+    Document
+        .find()
+        .then((error, data) => {
         console.log(data);
         if (error) {
             return res.status(500).json({
