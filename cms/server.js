@@ -14,7 +14,7 @@ const documentRoutes = require('./server/routes/documents');
 const contactRoutes = require('./server/routes/contacts');
 
 // establish a connection to the mongo database
-mongoose.connect('mongodb://127.0.0.1:27017/cms',
+mongoose.connect('mongodb://adminUser:dLzlSSaF2dPiFFZ6@cluster0.lcph8tp.mongodb.net/cms',
    { useNewUrlParser: true }, (err, res) => {
       if (err) {
          console.log('Connection failed: ' + err);

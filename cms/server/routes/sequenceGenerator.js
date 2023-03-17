@@ -16,7 +16,7 @@ function SequenceGenerator() {
         });
       }
 
-      sequenceId = sequence._id;
+      //sequenceId = sequence._id;
       maxDocumentId = sequence.maxDocumentId;
       maxMessageId = sequence.maxMessageId;
       maxContactId = sequence.maxContactId;
